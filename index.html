@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://d3js.org/d3-voronoi.v1.min.js"></script>
+    <link rel="stylesheet" href="styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;800&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@900&display=swap" rel="stylesheet"> -->
+</head>
+<body>
+    <div class="container">
+        <div class="chartTitle">
+            <h3>Color properties of gem collection data that includes information on name, color, carat weight, geolocation points, and&nbsp;photographic documentation.</h3>
+        </div>
+        <div id="viz" class="mainSvgItem"></div>
+    </div>
+    <div class="item">
+        <h1 class="mapTitle">Smithsonian Rock Ranger</h1>
+    </div>
+    <div class="dashboard">
+        <div id="toolTip" class="item">
+            <h3>Explore the chart for more info</h3>
+            <!-- <p id="toolTip" class="toolTip"></p> -->
+        </div>
+        <!-- <div class="item">
+            <img src="downloads/NMNH-10k0025-G9022-00-nr.jpg" width="350" height="">
+            <p>Name</p>
+            <p>Carats:</p>
+            <p>Cut:</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras fermentum odio ultrices ligula venenatis condimentum. Aliquam ultrices, ex eu porta dictum, odio massa condimentum magna, quis efficitur justo massa vel quam.</p>
+        </div> -->
+        <div class="ranger">
+            <div class="meter" id="viz3"></div>
+            <div class="meterScale">
+                <p class="meterText">
+                    0ct<span style="float:right"> 100ct</span>
+                </p>
+                <svg viewBox="0 10 405 191" xmlns="http://www.w3.org/2000/svg">
+                    <g stroke-width="1" stroke-linecap="round">
+                    <circle cx=".75" cy="25" r=".5" fill="#303030"/>
+                    <circle cx="20.75" cy="25" r="1" fill="#303030"/>
+                    <circle cx="40.5" cy="25" r="1.5" fill="#303030"/>
+                    <circle cx="62.25" cy="25" r="2" fill="#303030"/>
+                    <circle cx="83" cy="25" r="2.5" fill="#303030"/>
+                    <circle cx="103.75" cy="25" r="3" fill="#303030"/>
+                    <circle cx="124.5" cy="25" r="3.5" fill="#303030"/>
+                    <circle cx="145.25" cy="25" r="4" fill="#303030"/>
+                    <circle cx="166" cy="25" r="4.5" fill="#303030"/>
+                    <circle cx="186.75" cy="25" r="5" fill="#303030"/>
+                    <circle cx="207.5" cy="25" r="5.5" fill="#303030"/>
+                    <circle cx="228.25" cy="25" r="6" fill="#303030"/>
+                    <circle cx="249" cy="25" r="6.5" fill="#303030"/>
+                    <circle cx="269.75" cy="25" r="7" fill="#303030"/>
+                    <circle cx="290.5" cy="25" r="7.5" fill="#303030"/>
+                    <circle cx="311.25" cy="25" r="8" fill="#303030"/>
+                    <circle cx="332" cy="25" r="8.5" fill="#303030"/>
+                    <circle cx="352.75" cy="25" r="9" fill="#303030"/>
+                    <circle cx="373.5" cy="25" r="9.5" fill="#303030"/>
+                    <circle cx="394.25" cy="25" r="10" fill="#303030"/>
+                    </g>
+                </svg>
+                <svg class="svgItem" viewBox="5 0 153 110" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="25%" y2="200%">
+                        <stop offset="5.88%" style="stop-color:DeepPink;stop-opacity:1" />
+                        <stop offset="11.76%" style="stop-color:red;stop-opacity:1" />
+                        <stop offset="17.64%" style="stop-color:orangeRed;stop-opacity:1" />
+                        <stop offset="23.52%" style="stop-color:DarkOrange;stop-opacity:1" />
+                        <stop offset="29.4%" style="stop-color:orange;stop-opacity:1" />
+                        <stop offset="35.28%" style="stop-color:gold;stop-opacity:1" />
+                        <stop offset="41.16%" style="stop-color:greenyellow;stop-opacity:1" />
+                        <stop offset="47.04%" style="stop-color:limegreen;stop-opacity:1" />
+                        <stop offset="52.92%" style="stop-color:seagreen;stop-opacity:1" />
+                        <stop offset="58.8%" style="stop-color:mediumseagreen;stop-opacity:1" />
+                        <stop offset="64.68%" style="stop-color:lightseagreen;stop-opacity:1" />
+                        <stop offset="70.56%" style="stop-color:deepskyblue;stop-opacity:1" />
+                        <stop offset="76.44%" style="stop-color:dodgerblue;stop-opacity:1" />
+                        <stop offset="82.32%" style="stop-color:blue;stop-opacity:1" />
+                        <stop offset="88.2%" style="stop-color:navy;stop-opacity:1" />
+                        <stop offset="94.08%" style="stop-color:indigo;stop-opacity:1" />
+                        <stop offset="99.96%" style="stop-color:purple;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <g>
+                </svg>
+            </div>
+            <!-- <div class="meter" id="viz4"></div> -->
+            <!-- <div class="meter" id="viz5"></div> -->
+        </div>
+    </div>
+    <div class="colorMeter" id="viz4"></div>
+    <h1 id="dashTitle" class="dashTitle">Colors</h1>
+    <h1 class="rockRanger">Smithsonian Rock Ranger</h1>
+    <!-- <script src="scripts/main.js"></script> -->
+    <script src="scripts/colors.js"></script>
+</body>
+
+
+</html>
