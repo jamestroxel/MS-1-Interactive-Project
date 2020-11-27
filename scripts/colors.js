@@ -1,5 +1,5 @@
 d3.json('data/data.json').then(function(data){
-  var width = 2000;
+  var width = 1520;
   var height = 1000;
 
   var tooltip = d3.select("#toolTip")
