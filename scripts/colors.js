@@ -12,6 +12,8 @@ d3.json('data/data.json').then(function(data){
   const yScale = d3.scaleLinear()
   .domain([-180, 180])
   .range([0, height]); 
+  // var vertices = function(d){return d.geometry.coordinates};
+  // voronoi = d3.voronoi().size([width,height]);
 
   var svg = d3.select('#viz')
   .append('svg')
@@ -19,13 +21,20 @@ d3.json('data/data.json').then(function(data){
   .attr('width', width)
   .attr('height', height);
 
+  // svg.append("g")
+  //   .attr("class", "polygons")
+  //   .selectAll("path")
+  //   .data(voronoi.polygons(vertices))
+  //   .enter().append("path")
+  //   .attr("d", function(d){return "M"+d.join("L")+"Z"});
+
   svg.selectAll('g')
   .data(data)
   .join('circle')
   .attr('fill', 'white')
   .attr('cx', d => xScale(d.geometry.coordinates[1]))
   .attr('cy', d => yScale(d.geometry.coordinates[0]))
-  .attr('r', '5')
+  .attr('r', '2.5')
   .style('cursor', 'cell')
   // .on("mouseover", function(event, d) {
   //   tooltip
