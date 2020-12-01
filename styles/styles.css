@@ -16,6 +16,7 @@ body {
     width: 100%; */
 a {
     color: white;
+    text-decoration: none;
 }
 p {
     display: flex;
@@ -52,7 +53,7 @@ p {
     height: 100%;
     font-size: 18;
     margin-top: 8px;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     margin-left: 0px;
     margin-right: 0px;
     /* padding-left: 5px; */

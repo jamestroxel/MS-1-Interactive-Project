@@ -2,9 +2,11 @@ d3.json('data/data.json').then(function(data){
   var width = 1520;
   var height = 1000;
 
+  
+
   var tooltip = d3.select("#toolTip")
   .append("div")
-  .style("color", "white");
+  .attr('class', 'toolTip');
 
   const xScale = d3.scaleLinear()
   .domain([-90, 90])
@@ -21,6 +23,20 @@ d3.json('data/data.json').then(function(data){
   .attr('width', width)
   .attr('height', height);
 
+  var projection = d3.geoMercator();
+
+  var path = d3.geoPath()
+          .projection(projection);
+      var g = svg.append("g");
+      
+      d3.json("./data/countries.geojson", function(error, topology) {
+          g.selectAll("path")
+            .data(topojson.object(topology, topology.objects.countries)
+                .geometries)
+          .enter()
+            .append("path")
+            .attr("d", path)
+      });
   // svg.append("g")
   //   .attr("class", "polygons")
   //   .selectAll("path")
@@ -31,11 +47,12 @@ d3.json('data/data.json').then(function(data){
   svg.selectAll('g')
   .data(data)
   .join('circle')
+  .attr('class', 'gem')
   .attr('fill', 'white')
   .attr('cx', d => xScale(d.geometry.coordinates[1]))
   .attr('cy', d => yScale(d.geometry.coordinates[0]))
   .attr('r', '2.5')
-  .style('cursor', 'cell')
+  .style('cursor', 'cell');
   // .on("mouseover", function(event, d) {
   //   tooltip
   //   .html("")
@@ -65,22 +82,55 @@ d3.json('data/data.json').then(function(data){
   //     } else {return 'downSamples/JPEG/' + d.filename; }})
   //     return tooltip.style("visibility", "visible") 
   // })
-  .on("click", function(event, d) {
+  // .on("click", function(event, d) {
+  //   tooltip
+  //   .html("")
+  //   .append("div")
+  //   .attr('class', 'toolTipData')
+  //   .selectAll("text")
+  //   .data(data)
+  //   .join("text")
+  //   .html(function(d) { return  "Name: " + "<b>" + d.title + "</b>" + "<br/>" 
+  //   + "Carat Weight: " + "<b>" + d.caratWeight + "</b>" + "<br/>" 
+  //   + "Description: " + "<b>" + d.lowercaseName + "</b>" + "<br/>" 
+  //   + "<a href=" + d.link + ' target="_blank"' + "><b>Link</b></a>" + "<br/>" + "Photo:"; })
+  //   .append('img')
+  //   .attr('class', 'toolTip')
+  //   .attr('width', 340)
+  //   .attr('height', 100)
+  //   .attr('src', function(d) {
+  //     if (d.filename === "NMNH-501014.jpg" 
+  //     || d.filename === "NMNH-503014.jpg" 
+  //     || d.filename === "NMNH-504077.jpg"
+  //     || d.filename === "NMNH-NMNH-MS-2018-00018.jpg" 
+  //     || d.filename === "NMNH-NMNH-MS-2018-00019_screen.jpg"
+  //     || d.filename === "NMNH-504085.jpg"
+  //     || d.filename === "not found.jpg"){  
+  //       return "downSamples/JPEG/placeholder-01.svg";
+  //     } else {return 'downSamples/JPEG/' + d.filename; }})
+  //   return tooltip.style("visibility", "visible") 
+  // })
+
+  function click(event, d){
+    // debugger
+    d3.select(this)
     tooltip
     .html("")
-    .append("div")
+    .append("a")
+    .attr('href', `${d.link}`)
     .attr('class', 'toolTipData')
-    .selectAll("text")
-    .data(data)
-    .join("text")
-    .html(function(d) { return  "Name: " + "<b>" + d.title + "</b>" + "<br/>" 
-    + "Carat Weight: " + "<b>" + d.caratWeight + "</b>" + "<br/>" 
-    + "Description: " + "<b>" + d.lowercaseName + "</b>" + "<br/>" 
-    + "<a href=" + d.link + ' target="_blank"' + "><b>Link</b></a>" + "<br/>" + "Photo:"; })
+    .append("text")
+    .html(`Name: <b>${d.title}<br>`)
+    .append("text")
+    .html(`Carat Weight: <b>${d.caratWeight}<br>`)
+    .append("text")
+    .html(`Description: <b>${d.color}<br>`)
     .append('img')
+    .data(data)
     .attr('class', 'toolTip')
     .attr('width', 340)
     .attr('height', 100)
+    // .html(`<img src=${appendImage}>`)
     .attr('src', function(d) {
       if (d.filename === "NMNH-501014.jpg" 
       || d.filename === "NMNH-503014.jpg" 
@@ -91,8 +141,12 @@ d3.json('data/data.json').then(function(data){
       || d.filename === "not found.jpg"){  
         return "downSamples/JPEG/placeholder-01.svg";
       } else {return 'downSamples/JPEG/' + d.filename; }})
-    return tooltip.style("visibility", "visible") 
-  })
+    }
+
+  d3.selectAll('.gem')
+    .on("click", click);
+    //.on("mousemove", mousemove)
+    // .on('mouseout', mouseout)
 });
 
 
