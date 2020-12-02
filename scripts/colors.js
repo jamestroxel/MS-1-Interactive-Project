@@ -6,7 +6,7 @@ const width = 1000;
 
 /*** helper function ***/
 function mapHeight(projection, outline) {
-  const [[x0, y0], [x1, y1]] = d3.geoPath(projection.fitWidth(width, outline)).bounds(outline);
+  const [[x0, y0], [x1, y1]] = d3.geoPath(projection.fitWidth(width - 185, outline)).bounds(outline);
   const dy = Math.ceil(y1 - y0), l = Math.min(Math.ceil(x1 - x0), dy);
   
   projection.scale(projection.scale() * (l - 1) / l).precision(0.2);
