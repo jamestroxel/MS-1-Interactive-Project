@@ -87,8 +87,8 @@ function drawMap(world, data) {
     .append('img')
     .data(data)
     .attr('class', 'toolTipImage')
-    .attr('width', 340)
-    .attr('height', 100)
+    // .attr('width', 340)
+    // .attr('height', 100)
     // .html(`<img src=${appendImage}>`)
     .attr('src', function(d) {
       if (d.filename === "NMNH-501014.jpg" 
