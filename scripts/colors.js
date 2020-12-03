@@ -62,8 +62,9 @@ function drawMap(world, data) {
     .join("circle")
     .attr('class', 'gem')
     .attr('fill', 'white')
-    .attr("transform", d => `translate(${projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])})`)
-    .attr("r", 1.5)
+    // .attr("transform", d => `translate(${projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])})`)
+    .attr("transform", d => `translate(${projection([d.longitude, d.latitude])})`)
+    .attr("r", 1)
     .style('cursor', 'cell');
   
   var tooltip = d3.select("#toolTip")
@@ -77,6 +78,7 @@ function drawMap(world, data) {
     .html("")
     .append("a")
     .attr('href', `${d.link}`)
+    .attr('target', '_blank')
     .attr('class', 'toolTipData')
     .append("text")
     .html(`Name: <b>${d.title}<br>`)
@@ -97,7 +99,7 @@ function drawMap(world, data) {
       || d.filename === "NMNH-NMNH-MS-2018-00018.jpg" 
       || d.filename === "NMNH-NMNH-MS-2018-00019_screen.jpg"
       || d.filename === "NMNH-504085.jpg"
-      || d.filename === "not found.jpg"){  
+      || d.filename === "not-found.jpg"){  
         return "downSamples/JPEG/placeholder-01.svg";
       } else {return 'downSamples/JPEG/' + d.filename; }})
     }
@@ -110,12 +112,13 @@ function drawMap(world, data) {
 /*** load data ***/
 async function loadData() {
   const world = await d3.json('data/land-50m.json');
-  const airports = await d3.json('data/data.json');
-
-  drawMap(world, airports)
+  const gems = await d3.json('data/flatData.json');
+  console.log(gems);
+  drawMap(world, gems)
 }
 
 loadData();
+
 
 // d3.json('data/data.json').then(function(data){
 //   // var width = 1520;
