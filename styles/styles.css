@@ -1,5 +1,5 @@
 body {
-    background: black;
+    background: #010b13;
     margin: 0px;
 }
 /* .chart{
@@ -15,7 +15,7 @@ body {
     /* height: 150px;
     width: 100%; */
 a {
-    color: white;
+    color:#fffff0;
     text-decoration: none;
 }
 p {
@@ -27,14 +27,15 @@ p {
     padding: 0px;
     font-weight: 400;
     font-family: 'Epilogue', sans-serif;
-    color: white;
+    color: #fffff0;
     line-height: 1.5em;
 }  
 .toolTipData {
     font-family: 'Epilogue', sans-serif;
+    color:#fffff0;
     font-size: 1em;
-    /* line-height: 1.5em; */
-    margin-top: 0px;
+    line-height: 1.5em;
+    margin-top: 25px;
     margin-bottom: 0px;
     padding-bottom: 10px;
     padding-top: 0px;
@@ -48,7 +49,7 @@ p {
     padding-bottom: 10px;
 }  
 .toolTip {
-    display: inline-flex;
+    display: block;
     /* width: 100%; */
     /* height: 100%; */
     font-size: 18;
@@ -56,11 +57,11 @@ p {
     margin-bottom: 0px;
     margin-left: 0px;
     margin-right: 0px;
-    /* padding-left: 5px; */
+    padding-left: 0px;
     padding-bottom: 0px;
     font-weight: 400;
     font-family: 'Epilogue', sans-serif;
-    color: white;
+    color: #fffff0;
     line-height: 1.5em;
 }   
 .toolTipImage {
@@ -71,20 +72,20 @@ p {
     /* height: 100%; */
     font-size: 18;
     /* margin-top: -240px; */
-    margin-bottom: -80px;
+    margin-bottom: 25px;
     margin-left: 0px;
     margin-right: 0px;
     padding-top: 25px;
     padding-bottom: 25px;
     font-weight: 400;
     font-family: 'Epilogue', sans-serif;
-    color: white;
+    color: #fffff0;
     line-height: 1.5em;
 } 
 .dataLabels {
     font-family: 'Epilogue', sans-serif;
     font-size: 1.5em;
-    color: white;
+    color: #fffff0;
 }
 .dashboard{
     flex-wrap: wrap;
@@ -95,7 +96,7 @@ p {
     bottom: 0px;
     width: 400px;
     height: 100%;
-    border: white;
+    border: #fffff0;
     border-style: solid;
     border-width: 10px;
     padding-top: 0px;
@@ -114,7 +115,7 @@ p {
     /* align-content: center; */
     width: 100%;
     height: 100%;
-    border: white;
+    border: #fffff0;
     border-style: solid;
     border-width: 10px;;
     padding-left: 410px;
@@ -131,11 +132,17 @@ p {
 }
 .item{
     width: 340px;
-    margin-top: 25px;
+    border: solid;
+    border-color: #303030;
+    border-width: 1px;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    margin-top: 50px;
     margin-bottom: 360px;
     /* margin: 0px; */
-    padding: 0px;
-    overflow-y: scroll;
+    padding-top: 25px;
+    /* overflow-y: scroll; */
 }
 .svgContainer{
     width: 100%;
@@ -190,8 +197,8 @@ p {
     border-top: 10px;
     border-bottom: 10px;
     border-style: solid;
-    border-color: white;
-    background: black;
+    border-color: #fffff0;
+    background: #010b13;
     justify-content: center;
     padding-left: 0px;
     padding-right: 0px;
@@ -202,7 +209,7 @@ p {
 h2 {
     display: flex;
     width: 100%;
-    font-size: 1.5em;
+    font-size: 1.25em;
     margin-top: 50px;
     margin-bottom: 0.67em;
     margin-left: 30px;
@@ -210,11 +217,12 @@ h2 {
     line-height: 1.5em;
     font-weight: 400;
     font-family: 'Epilogue', sans-serif; 
-    color: white;
+    color: #fffff0;
 }
 h3 {
     height: 50px;
-    display: flex;
+    width: 100%;
+    display: inline;
     font-size: 1em;
     margin-top: 25px;
     margin-bottom: 0.67em;
@@ -223,13 +231,13 @@ h3 {
     line-height: 1.5em;
     font-weight: 400;
     font-family: 'Epilogue', sans-serif; 
-    color: white;
+    color: #fffff0;
     border-bottom: #303030;
     border-top: 0;
     border-left: 0;
     border-right: 0;
     border-bottom-width: 1px;
-    border-style: dashed;
+    border-style: solid;
 }
 .mapTitle {
     display: flex;
@@ -246,8 +254,8 @@ h3 {
     padding-bottom: 10px;
     font-weight: 400;
     font-family: 'Epilogue', sans-serif;
-    color: white;
-    background: black;
+    color: #fffff0;
+    background: #010b13;
 }
 .dashTitle {
     display: flex;
@@ -255,7 +263,7 @@ h3 {
     top:0;
     left:0;
     border-style: solid;
-    border-color: white;
+    border-color: #fffff0;
     border-width: 5px;
     border-radius: 2em;
     /* width: 350px; */
@@ -273,20 +281,20 @@ h3 {
     text-align: center;
     font-weight: 400;
     font-family: 'Epilogue', sans-serif;
-    color: white;
-    background: black;
+    color: #fffff0;
+    background: #010b13;
 }
 .rockRanger {
     position: fixed;
     bottom: 0;
-    margin-bottom: 50px;
+    margin-bottom: 35px;
     margin-left: 44px;
     padding: 10px;
     /* font-weight: bold; */
     font-family: 'Epilogue', sans-serif;
     font-size: 1em;
-    color: white;
-    background: black;
+    color: #fffff0;
+    background: #010b13;
     transform: rotate(-90deg);
     transform-origin: left bottom;
 }
@@ -304,14 +312,14 @@ h3 {
 }
 .meterScale{
     height: 50px;
-    border-left:#303030;
-    border-right:#303030;
-    border-bottom-left-radius: 15px;
+    /* border-left:#303030;
+    border-right:#303030; */
+    /* border-bottom-left-radius: 15px;
     border-top-left-radius: 15px;
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
     border-width: 1px;
-    border-style: dashed; 
+    border-style: dashed;  */
     padding:10px;
     margin-top: 0px;
     margin:15px;
@@ -326,19 +334,15 @@ h3 {
     font-size: .75em;
     color: #303030;
 }
-label {
-    display: inline-flex;
-    font-size: 1em;
-    margin-top: 50;
-    margin-bottom: 0.67em;
-    margin-left: 50px;
-    margin-right: 0;
-    /* font-weight: bold; */
+.dataLabels {
+    align-content: center;
+    text-align: center;
+    font-size: .75em;   
     font-family: 'Epilogue', sans-serif;
-    color: white;
+    color: #fffff0;
 }
 .axisWhite {
-    stroke: white;
+    stroke: #fffff0;
 }
 .colorMeter{
     margin-top: 87px;
@@ -347,14 +351,14 @@ label {
 
 }
 .gem {
-    color: white;
+    color: #fffff0;
     /* transform: translateY(4px); */
     
 }
 .name{
     display: block;
     font-size: 2.5em;
-    padding-bottom: 15px;
+    padding-bottom: 25px;
     /* margin-bottom: 5px; */
     line-height: 1.5em;
     border-style: solid; 
@@ -362,5 +366,5 @@ label {
     border-right: none;
     border-top: none;
     border-bottom-width:5px; 
-
 }
+

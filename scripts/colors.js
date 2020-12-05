@@ -42,17 +42,17 @@ function drawMap(world, data) {
 
   g.append("use")
     .attr("xlink:href", new URL("#outline", location))
-    .attr("fill", "white");
+    .attr("fill", "#fffff0");
 
   g.append("path")
     .attr("d", path(graticule))
-    .attr("stroke", "black")
+    .attr("stroke", "#010b13")
     .attr("stroke-width", "2.5")
     .attr("fill", "none");
 
   g.append("path")
     .attr("d", path(land))
-    .attr("fill", "black");
+    .attr("fill", "#010b13");
 
   svg.append("use")
     .attr("xlink:href", new URL("#outline", location))
@@ -69,12 +69,10 @@ function drawMap(world, data) {
     // .attr('stroke-width', '2.5')
     // .attr("transform", d => `translate(${projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])})`)
     .attr("transform", d => `translate(${projection([d.longitude, d.latitude])})`)
-    .attr("r", 1)
+    .attr("r", .75)
     .style('cursor', 'cell');
   
-  var tooltip = d3.select("#toolTip")
-  .append("div")
-  .attr('class', 'toolTip');
+  var tooltip = d3.selectAll("#toolTip");
 
   function hover(event, d){
     d3.select(this)
@@ -83,11 +81,16 @@ function drawMap(world, data) {
   }
   function mouseout(event, d){
     d3.select(this)
-    .attr('r', 1)
+    .attr('r', .75)
   }
 
   function click(event, d){
-    // debugger
+      
+      d3.select('.toolTip')
+      .remove()
+      .join('toolTip')
+      .append("div")
+      .attr('class', 'toolTip');
       d3.select(this)
       tooltip
       .html("")
@@ -284,61 +287,65 @@ loadData();
 
 
 ///// Dashboard Carat Chart /////////
-  let bins;    
-  var caratWeights =[];
-  var colors =[];
-  d3.json('data/data.json').then(function(data){ 
-    data.forEach(function(d){
-      if(d.caratWeight!=null)
-      caratWeights.push(d.caratWeight);
-    })
+  // let bins;    
+  // var caratWeights =[];
+  // var colors =[];
+  // d3.json('data/data.json').then(function(data){ 
+  //   data.forEach(function(d){
+  //     if(d.caratWeight!=null)
+  //     caratWeights.push(d.caratWeight);
+  //   })
     
   
-    let bin = d3.bin().domain([0, 100]).thresholds(50);
+  //   let bin = d3.bin().domain([0, 7500]).thresholds(1000);
   
-    let bins = bin(caratWeights);
-  
-  
-    var margin = ({top: 2, right: 0, bottom: 2, left: 0})
-        meterWidth = 350,
-        height = 125 - margin.top - margin.bottom;
+  //   let bins = bin(caratWeights);
   
   
-    var x = d3.scaleLinear()
-      .domain([bins[0].x0, bins[bins.length - 1].x1])
-      .range([margin.left, meterWidth - margin.right]);
+  //   var margin = ({top: 5, right: 0, bottom: 10, left: 0})
+  //       meterWidth = 350,
+  //       height = 135 + margin.top - margin.bottom;
+  
+  
+  //   var x = d3.scaleLinear()
+  //     .domain([bins[0].x0, bins[bins.length - 1].x1])
+  //     .range([margin.left, meterWidth - margin.right]);
       
-    var y = d3.scaleLinear()
-      .domain([0, d3.max(bins, d => d.length)])
-      .range([height - margin.bottom, margin.top]);
+  //   var y = d3.scaleLinear()
+  //     .domain([0, d3.max(bins, d => d.length)])
+  //     .range([height - margin.bottom, margin.top]);
   
-    var svg = d3.select('#viz3')
-      .append('svg')
-      .attr('width', meterWidth)
-      .attr('height', height)
-      .attr("fill", "white");
+  //   var svg = d3.select('#viz3')
+  //     .append('svg')
+  //     .attr('width', meterWidth)
+  //     .attr('height', height - margin.bottom)
+  //     .attr("fill", "white");
       
-      svg.append("g")
-        .attr("stroke", "white")
-        .attr("stroke-linecap", "round")
-        .attr("stroke-width", 5)
-        .selectAll("line")
-        .data(bins)
-        .join("line")
-        .attr("x1", d => x(d.x0) + 2.5)
-        .attr("x2", d => x(d.x0) + 2.5)
-        .attr("y2", d => y(d.length))
-        .attr("y1", d => y(height - d.length))
-      svg.append("line")
-        .each(function(d) {this._current = d;} )
-  });
+  //     svg.append("g")
+  //     .attr('height', height - margin.bottom)
+  //       .attr("stroke", "#fffff0")
+  //       .attr("stroke-linecap", "round")
+  //       .attr("stroke-width", 5)
+  //       .selectAll("line")
+  //       .data(bins)
+  //       .join("line")
+  //       .attr("x1", d => x(d.x0) + 2.5)
+  //       .attr("x2", d => x(d.x0) + 2.5)
+  //       .attr("y2", d => y(d.length))
+  //       .attr("y1", d => y(d.length - height))
+  //     svg.append("text")
+  //     .attr('class', 'meterText')
+  //     .attr('x', 0)
+  //     .attr('y', 130)
+  //     .html("0 ct")
+  // });
 
 ///////// Dashboard Color Chart ////////
 d3.json('data/colorCats.json').then(function(data){
-  
-  var margin = ({top: 0, right: 0, bottom: 25, left: 0})
+  var tooltip = d3.selectAll("#toolTip");
+  var margin = ({top: 5, right: 0, bottom: 25, left: 0})
       meterWidth = 430 - margin.left - margin.right,
-      height = 150 - margin.top - margin.bottom;
+      height = 400 - margin.top - margin.bottom;
   
   const xScale = d3.scaleBand()
     .domain(data.map(d => d.color))
@@ -362,6 +369,56 @@ d3.json('data/colorCats.json').then(function(data){
     .attr("rx", 11)
     .attr("y", d => y(d.value))
     .attr("height", d => y(0) - y(d.value) + 35)
+    .on("mouseover", mouseover)
+    .on('mouseout', mouseout)
+    .on("click", function(event, d) {
+      tooltip
+      .html("")
+      .append("a")
+      .attr('class', 'toolTipData')
+      .selectAll("text")
+      .data(d.data)
+      .join("text")
+      .html(function(d) { return '<span class="name">' + d.title + '</span>' + "<br/>" 
+      +  "<b>" + "Weight " + "</b>" + d.caratWeight + "<br/>" 
+      + "<b>" +  "Description " + "</b>" + d.lowercaseName + "<br/>" 
+      + "<a href=" + d.link + ' target="_blank"' + "><b>Link</b></a>" + "<br/>"; })
+      .append('img')
+      .attr('class', 'toolTipImage')
+      .attr('width', 340)
+      .attr('src', function(d) { 
+        if (d.filename === "NMNH-501014.jpg" 
+        || d.filename === "NMNH-503014.jpg" 
+        || d.filename === "NMNH-504077.jpg"
+        || d.filename === "NMNH-NMNH-MS-2018-00018.jpg" 
+        || d.filename === "NMNH-NMNH-MS-2018-00019_screen.jpg"
+        || d.filename === "NMNH-504085.jpg"
+        || d.filename === "not found.jpg"){  
+          return 'downSamples/JPEG/placeholder-01.svg';
+        } else {return 'downSamples/JPEG/' + d.filename; }})
+        return tooltip.style("visibility", "visible") 
+      
+    });
+    
+
+    function mouseover(event, d){
+      d3.select(this)
+      // .attr('stroke', '#010b13')
+      // .attr('stroke-width', 5)
+      .attr("width", 27)
+      .attr("rx", 13)
+      .attr("height", d => y(0) - y(d.value) + 40)
+      .attr("y", d => y(d.value)-5)
+    }
+    function mouseout(event, d){
+      d3.select(this)
+      .attr('stroke', 'none')
+      .attr('stroke-width', 'none')
+      .attr("width", 22)
+      .attr("rx", 11)
+      .attr("height", d => y(0) - y(d.value) + 35)
+      .attr("y", d => y(d.value))
+    }
   });
 
   
