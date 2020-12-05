@@ -3,7 +3,10 @@
 
 /*** global variable/s ***/
 const width = 1000;
-
+d3.select("#viz")
+      .call( d3.brush()                     // Add the brush feature using the d3.brush function
+        .extent( [ [0,0], [mapHeight,width] ] )       // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
+      )
 /*** helper function ***/
 function mapHeight(projection, outline) {
   const [[x0, y0], [x1, y1]] = d3.geoPath(projection.fitWidth(width - 185, outline)).bounds(outline);
@@ -62,6 +65,8 @@ function drawMap(world, data) {
     .join("circle")
     .attr('class', 'gem')
     .attr('fill', 'white')
+    // .attr('stroke', 'black')
+    // .attr('stroke-width', '2.5')
     // .attr("transform", d => `translate(${projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])})`)
     .attr("transform", d => `translate(${projection([d.longitude, d.latitude])})`)
     .attr("r", 1)
@@ -71,41 +76,60 @@ function drawMap(world, data) {
   .append("div")
   .attr('class', 'toolTip');
 
+  function hover(event, d){
+    d3.select(this)
+    .attr('r', 3)
+    .style("transition", "100ms ease-in-out, transform 100ms ease")
+  }
+  function mouseout(event, d){
+    d3.select(this)
+    .attr('r', 1)
+  }
+
   function click(event, d){
     // debugger
-    d3.select(this)
-    tooltip
-    .html("")
-    .append("a")
-    .attr('href', `${d.link}`)
-    .attr('target', '_blank')
-    .attr('class', 'toolTipData')
-    .append("text")
-    .html(`Name: <b>${d.title}<br>`)
-    .append("text")
-    .html(`Carat Weight: <b>${d.caratWeight}<br>`)
-    .append("text")
-    .html(`Description: <b>${d.color}<br>`)
-    .append('img')
-    .data(data)
-    .attr('class', 'toolTipImage')
-    .attr('width', 340)
-    // .attr('height', 100)
-    // .html(`<img src=${appendImage}>`)
-    .attr('src', function(d) {
-      if (d.filename === "NMNH-501014.jpg" 
-      || d.filename === "NMNH-503014.jpg" 
-      || d.filename === "NMNH-504077.jpg"
-      || d.filename === "NMNH-NMNH-MS-2018-00018.jpg" 
-      || d.filename === "NMNH-NMNH-MS-2018-00019_screen.jpg"
-      || d.filename === "NMNH-504085.jpg"
-      || d.filename === "not-found.jpg"){  
-        return "downSamples/JPEG/placeholder-01.svg";
-      } else {return 'downSamples/JPEG/' + d.filename; }})
-    }
-
+      d3.select(this)
+      tooltip
+      .html("")
+      .append("a")
+      .attr('href', `${d.link}`)
+      .attr('target', '_blank')
+      .attr('class', 'toolTipData')
+      .append("text")
+      .html(`<span class="name">${d.title}</span><br>`)
+      // .append("text")
+      // .html(`Carat Weight: <b>${d.caratWeight}<br>`)
+      // .append("text")
+      // .html(`Cut: <b>${d.cut}<br>`)
+      // .append("text")
+      // .html(`Description: <b>${d.color}<br>`)
+      .append("text")
+      .html(`<b>${d.description[0].label0}</b> ${d.description[0].conten0}<br>
+      <b>${d.description[1].label1}</b> ${d.description[1].content1}<br>
+      <b>${d.description[2].label2}</b> ${d.description[2].content2}<br>
+      <b>${d.description[3].label3}</b> ${d.description[3].content3}<br>
+      <b>${d.description[4].label4}</b> ${d.description[4].content4}`)
+      .append('img')
+      // .data(data)
+      .attr('class', 'toolTipImage')
+      .attr('width', 340)
+      // .attr('height', 100)
+      // .html(`<img src=${appendImage}>`)
+      .attr('src', function() {
+        if (d.filename === "NMNH-501014.jpg" 
+        || d.filename === "NMNH-503014.jpg" 
+        || d.filename === "NMNH-504077.jpg"
+        || d.filename === "NMNH-NMNH-MS-2018-00018.jpg" 
+        || d.filename === "NMNH-NMNH-MS-2018-00019_screen.jpg"
+        || d.filename === "NMNH-504085.jpg"
+        || d.filename === "not-found.jpg"){  
+          return "downSamples/JPEG/placeholder-01.svg";
+        } else {return 'downSamples/JPEG/' + d.filename; }})
+      }
   d3.selectAll('.gem')
-    .on("click", click);
+    .on("click", click)
+    .on('mouseover', hover)
+    .on("mouseout", mouseout)
   
 }
 
@@ -339,3 +363,5 @@ d3.json('data/colorCats.json').then(function(data){
     .attr("y", d => y(d.value))
     .attr("height", d => y(0) - y(d.value) + 35)
   });
+
+  

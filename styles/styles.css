@@ -33,11 +33,11 @@ p {
 .toolTipData {
     font-family: 'Epilogue', sans-serif;
     font-size: 1em;
-    line-height: 1.5em;
-    margin-top: 25px;
+    /* line-height: 1.5em; */
+    margin-top: 0px;
     margin-bottom: 0px;
     padding-bottom: 10px;
-    padding-top: 25px;
+    padding-top: 0px;
 }  
 .data {
     font-family: 'Epilogue', sans-serif;
@@ -74,7 +74,7 @@ p {
     margin-bottom: -80px;
     margin-left: 0px;
     margin-right: 0px;
-    padding-top: 10px;
+    padding-top: 25px;
     padding-bottom: 25px;
     font-weight: 400;
     font-family: 'Epilogue', sans-serif;
@@ -346,6 +346,21 @@ label {
     z-index: 0;
 
 }
-.gems {
+.gem {
     color: white;
+    /* transform: translateY(4px); */
+    
+}
+.name{
+    display: block;
+    font-size: 2.5em;
+    padding-bottom: 15px;
+    /* margin-bottom: 5px; */
+    line-height: 1.5em;
+    border-style: solid; 
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-bottom-width:5px; 
+
 }
