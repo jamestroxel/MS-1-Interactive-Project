@@ -1,6 +1,6 @@
 
 const fs = require('fs')
-let data =  JSON.parse(fs.readFileSync('../../data/data.json'));
+let data =  JSON.parse(fs.readFileSync('../../data/flatData.json'));
 // console.log(data);
 let colorCount = [];
 
@@ -86,12 +86,13 @@ function groupColors(data){
         console.log(d.name);
     let lowercaseName = d.color.toLowerCase()
     let title = d.title
-    let longitude = d.geometry.coordinates[0]
-    let latitude = d.geometry.coordinates[1]
+    let longitude = d.longitude
+    let latitude = d.latitude
     let caratWeight = d.caratWeight
     let primaryImage = d.primaryImage
     let filename = d.filename
     let link = d.link
+    let description = d.description
     if (lowercaseName.includes("pink") 
         && !lowercaseName.includes("red")
         && !lowercaseName.includes("gray")) {
@@ -102,7 +103,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("red") 
         && !lowercaseName.includes("orange")
@@ -115,7 +117,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("red") 
         && lowercaseName.includes("orange")
@@ -127,7 +130,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("orange") 
         || lowercaseName.includes("brown") 
@@ -141,7 +145,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("yellow") 
         && lowercaseName.includes("orange")
@@ -153,7 +158,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("yellow") 
         && !lowercaseName.includes("orange")
@@ -166,7 +172,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("yellow") 
         && lowercaseName.includes("green")) {
@@ -177,7 +184,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("yellow") 
         && lowercaseName.includes("green")
@@ -189,7 +197,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("green") 
         && !lowercaseName.includes("yellow") 
@@ -203,7 +212,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("green") 
         && lowercaseName.includes("dark") 
@@ -217,7 +227,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("green") 
         && lowercaseName.includes("blue") 
@@ -230,7 +241,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("blue") 
         && lowercaseName.match("light") 
@@ -244,7 +256,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("blue")  
         && !lowercaseName.includes("red") 
@@ -260,7 +273,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("blue") 
         && lowercaseName.includes("medium")
@@ -278,7 +292,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("blue")  
         && lowercaseName.includes("red")
@@ -293,7 +308,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("purple")  
         || lowercaseName.includes("violet")
@@ -305,7 +321,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("indigo")  
         || lowercaseName.includes("violet")
@@ -318,7 +335,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("various")  
         || lowercaseName.includes("multi")
@@ -330,7 +348,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("colorless")  
         || lowercaseName.includes("clear")
@@ -342,7 +361,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     if (lowercaseName.includes("gray")  
         || lowercaseName.includes("black")
@@ -354,7 +374,8 @@ function groupColors(data){
             caratWeight,
             primaryImage,
             filename,
-            link})
+            link,
+            description})
     }
     });
     console.log(gemColors);

@@ -3,10 +3,6 @@
 
 /*** global variable/s ***/
 const width = 1000;
-d3.select("#viz")
-      .call( d3.brush()                     // Add the brush feature using the d3.brush function
-        .extent( [ [0,0], [mapHeight,width] ] )       // initialise the brush area: start at 0,0 and finishes at width,height: it means I select the whole graph area
-      )
 /*** helper function ***/
 function mapHeight(projection, outline) {
   const [[x0, y0], [x1, y1]] = d3.geoPath(projection.fitWidth(width - 185, outline)).bounds(outline);
@@ -43,7 +39,7 @@ function drawMap(world, data) {
   g.append("use")
     .attr("xlink:href", new URL("#outline", location))
     .attr("fill", "#fffff0");
-
+    
   g.append("path")
     .attr("d", path(graticule))
     .attr("stroke", "#010b13")
@@ -74,9 +70,10 @@ function drawMap(world, data) {
   
   var tooltip = d3.selectAll("#toolTip");
 
+  
   function hover(event, d){
     d3.select(this)
-    .attr('r', 3)
+    .attr('r', 4)
     .style("transition", "100ms ease-in-out, transform 100ms ease")
   }
   function mouseout(event, d){
@@ -85,7 +82,10 @@ function drawMap(world, data) {
   }
 
   function click(event, d){
-      
+    d3.select('.item')
+      .style('border-color', '#303030');
+      d3.select('.rockRanger')
+      .style('color', '#fffff0')
       d3.select('.toolTip')
       .remove()
       .join('toolTip')
@@ -146,145 +146,12 @@ async function loadData() {
 
 loadData();
 
-
-// d3.json('data/data.json').then(function(data){
-//   // var width = 1520;
-//   // var height = 1000;
-
-  
-
-//   var tooltip = d3.select("#toolTip")
-//   .append("div")
-//   .attr('class', 'toolTip');
-
-//   // const xScale = d3.scaleLinear()
-//   // .domain([-90, 90])
-//   // .range([0, width])
-//   // const yScale = d3.scaleLinear()
-//   // .domain([-180, 180])
-//   // .range([0, height]); 
-//   // var vertices = function(d){return d.geometry.coordinates};
-//   // voronoi = d3.voronoi().size([width,height]);
-
-//   var svg = d3.select('#viz')
-//   .append('svg')
-//   .attr('class', 'map')
-//   .attr('width', width)
-//   .attr('height', height);
-
-  
-  // svg.append("g")
-  //   .attr("class", "polygons")
-  //   .selectAll("path")
-  //   .data(voronoi.polygons(vertices))
-  //   .enter().append("path")
-  //   .attr("d", function(d){return "M"+d.join("L")+"Z"});
-
-  // svg.selectAll('g')
-  // .data(data)
-  // .join('circle')
-  // .attr('class', 'gem')
-  // .attr('fill', 'white')
-  // .attr('cx', d => xScale(d.geometry.coordinates[1]))
-  // .attr('cy', d => yScale(d.geometry.coordinates[0]))
-  // .attr('r', '2.5')
-  // .style('cursor', 'cell');
-  // .on("mouseover", function(event, d) {
-  //   tooltip
-  //   .html("")
-  //   .append("div")
-  //   .attr('class', 'toolTipData')
-  //   .select("text")
-  //   .data(data)
-  //   .join("text")
-  //   .html(function(d) { return  "Name: " + "<b>" + d.title + "</b>" + "<br/>" 
-  //   + "Carat Weight: " + "<b>" + d.caratWeight + "</b>" + "<br/>" 
-  //   + "Description: " + "<b>" + d.lowercaseName + "</b>" + "<br/>" 
-  //   + "<a href=" + d.link + ' target="_blank"' + "><b>Link</b></a>" + "<br/>" + "Photo:"; })
-  //   .append('img')
-  //   .attr('class', 'toolTip')
-  //   .style('color', 'red')
-  //   .attr('width', 340)
-  //   .attr('height', 100)
-  //   .attr('src', function(d) { 
-  //     if (d.filename === "NMNH-501014.jpg" 
-  //     || d.filename === "NMNH-503014.jpg" 
-  //     || d.filename === "NMNH-504077.jpg"
-  //     || d.filename === "NMNH-NMNH-MS-2018-00018.jpg" 
-  //     || d.filename === "NMNH-NMNH-MS-2018-00019_screen.jpg"
-  //     || d.filename === "NMNH-504085.jpg"
-  //     || d.filename === "not found.jpg"){  
-  //       return 'downSamples/JPEG/placeholder-01.svg';
-  //     } else {return 'downSamples/JPEG/' + d.filename; }})
-  //     return tooltip.style("visibility", "visible") 
-  // })
-  // .on("click", function(event, d) {
-  //   tooltip
-  //   .html("")
-  //   .append("div")
-  //   .attr('class', 'toolTipData')
-  //   .selectAll("text")
-  //   .data(data)
-  //   .join("text")
-  //   .html(function(d) { return  "Name: " + "<b>" + d.title + "</b>" + "<br/>" 
-  //   + "Carat Weight: " + "<b>" + d.caratWeight + "</b>" + "<br/>" 
-  //   + "Description: " + "<b>" + d.lowercaseName + "</b>" + "<br/>" 
-  //   + "<a href=" + d.link + ' target="_blank"' + "><b>Link</b></a>" + "<br/>" + "Photo:"; })
-  //   .append('img')
-  //   .attr('class', 'toolTip')
-  //   .attr('width', 340)
-  //   .attr('height', 100)
-  //   .attr('src', function(d) {
-  //     if (d.filename === "NMNH-501014.jpg" 
-  //     || d.filename === "NMNH-503014.jpg" 
-  //     || d.filename === "NMNH-504077.jpg"
-  //     || d.filename === "NMNH-NMNH-MS-2018-00018.jpg" 
-  //     || d.filename === "NMNH-NMNH-MS-2018-00019_screen.jpg"
-  //     || d.filename === "NMNH-504085.jpg"
-  //     || d.filename === "not found.jpg"){  
-  //       return "downSamples/JPEG/placeholder-01.svg";
-  //     } else {return 'downSamples/JPEG/' + d.filename; }})
-  //   return tooltip.style("visibility", "visible") 
-  // })
-
-//   function click(event, d){
-//     // debugger
-//     d3.select(this)
-//     tooltip
-//     .html("")
-//     .append("a")
-//     .attr('href', `${d.link}`)
-//     .attr('class', 'toolTipData')
-//     .append("text")
-//     .html(`Name: <b>${d.title}<br>`)
-//     .append("text")
-//     .html(`Carat Weight: <b>${d.caratWeight}<br>`)
-//     .append("text")
-//     .html(`Description: <b>${d.color}<br>`)
-//     .append('img')
-//     .data(data)
-//     .attr('class', 'toolTip')
-//     .attr('width', 340)
-//     .attr('height', 100)
-//     // .html(`<img src=${appendImage}>`)
-//     .attr('src', function(d) {
-//       if (d.filename === "NMNH-501014.jpg" 
-//       || d.filename === "NMNH-503014.jpg" 
-//       || d.filename === "NMNH-504077.jpg"
-//       || d.filename === "NMNH-NMNH-MS-2018-00018.jpg" 
-//       || d.filename === "NMNH-NMNH-MS-2018-00019_screen.jpg"
-//       || d.filename === "NMNH-504085.jpg"
-//       || d.filename === "not found.jpg"){  
-//         return "downSamples/JPEG/placeholder-01.svg";
-//       } else {return 'downSamples/JPEG/' + d.filename; }})
-//     }
-
-//   d3.selectAll('.gem')
-//     .on("click", click);
-//     //.on("mousemove", mousemove)
-//     // .on('mouseout', mouseout)
-// });
-
+async function loadColorData() {
+  const world = await d3.json('data/land-50m.json');
+  const gemColors = await d3.json('data/colorCats.json');
+  console.log(gemColors);
+  drawMap(world, gemColors)
+}
 
 ///// Dashboard Carat Chart /////////
   // let bins;    
@@ -343,9 +210,9 @@ loadData();
 ///////// Dashboard Color Chart ////////
 d3.json('data/colorCats.json').then(function(data){
   var tooltip = d3.selectAll("#toolTip");
-  var margin = ({top: 5, right: 0, bottom: 25, left: 0})
+  var margin = ({top: 15, right: 0, bottom: 25, left: 0})
       meterWidth = 430 - margin.left - margin.right,
-      height = 400 - margin.top - margin.bottom;
+      height = 410 - margin.top - margin.bottom;
   
   const xScale = d3.scaleBand()
     .domain(data.map(d => d.color))
@@ -367,22 +234,32 @@ d3.json('data/colorCats.json').then(function(data){
     .attr("x", function(d){return xScale(d.color) })
     .attr("width", 22)
     .attr("rx", 11)
-    .attr("y", d => y(d.value))
-    .attr("height", d => y(0) - y(d.value) + 35)
+    .attr("y", d => y(0))
+    .attr("height", d => y(0) - y(0) + 35)
     .on("mouseover", mouseover)
     .on('mouseout', mouseout)
     .on("click", function(event, d) {
+      // debugger
+      d3.select('.item')
+      .style('border-color', function() { return d.color; })
+      d3.select('.rockRanger')
+      .style('color',function() { return d.color; });
       tooltip
       .html("")
+      .data(d.data)
       .append("a")
+      .attr('href', `${d.data.link}`)
+      .attr('target', '_blank')
       .attr('class', 'toolTipData')
       .selectAll("text")
       .data(d.data)
       .join("text")
       .html(function(d) { return '<span class="name">' + d.title + '</span>' + "<br/>" 
-      +  "<b>" + "Weight " + "</b>" + d.caratWeight + "<br/>" 
-      + "<b>" +  "Description " + "</b>" + d.lowercaseName + "<br/>" 
-      + "<a href=" + d.link + ' target="_blank"' + "><b>Link</b></a>" + "<br/>"; })
+      + '<b>' + d.description[0].label0 + '</b> ' + d.description[0].conten0 + '<br>'
+      + '<b>' + d.description[1].label1 + '</b> ' + d.description[1].content1 + '<br>'
+      + '<b>' + d.description[2].label2 + '</b> ' + d.description[2].content2 + '<br>'
+      + '<b>' + d.description[3].label3 + '</b> ' + d.description[3].content3 + '<br>'
+      + '<b>' + d.description[4].label4 + '</b> ' + d.description[4].content4 })
       .append('img')
       .attr('class', 'toolTipImage')
       .attr('width', 340)
@@ -393,12 +270,11 @@ d3.json('data/colorCats.json').then(function(data){
         || d.filename === "NMNH-NMNH-MS-2018-00018.jpg" 
         || d.filename === "NMNH-NMNH-MS-2018-00019_screen.jpg"
         || d.filename === "NMNH-504085.jpg"
-        || d.filename === "not found.jpg"){  
+        || d.filename === "not-found.jpg"){  
           return 'downSamples/JPEG/placeholder-01.svg';
         } else {return 'downSamples/JPEG/' + d.filename; }})
         return tooltip.style("visibility", "visible") 
-      
-    });
+      });
     
 
     function mouseover(event, d){
@@ -419,6 +295,13 @@ d3.json('data/colorCats.json').then(function(data){
       .attr("height", d => y(0) - y(d.value) + 35)
       .attr("y", d => y(d.value))
     }
+    svg1.selectAll("rect")
+    .transition()
+    .duration(400)
+    .ease(d3.easeBack)
+    .attr("y", d => y(d.value))
+    .attr("height", d => y(0) - y(d.value) + 35)
+    .delay(function(d,i){console.log(i) ; return(i*10)});
   });
 
   

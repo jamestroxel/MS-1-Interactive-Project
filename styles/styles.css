@@ -367,4 +367,37 @@ h3 {
     border-top: none;
     border-bottom-width:5px; 
 }
+.colorNav{
+    position: fixed;
+    top: 0;
+    margin-top: -10px;
+    padding-top: -10px;
+}
+  .dashTitleGrad {
+    display: flex;
+    position: fixed;
+    top:0;
+    left:0;
+    border-style: solid;
+    border-color: #fffff0;
+    border-width: 5px;
+    border-radius: 2em;
+    /* width: 350px; */
+    /* margin-left: 20px; */
+    display: block;
+    font-size: 1em;
+    margin-top: 7px;
+    margin-bottom: 0px;
+    margin-left: 50px;
+    margin-right: 0px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    text-align: center;
+    font-weight: 400;
+    font-family: 'Epilogue', sans-serif;
+    color: #fffff0;
+    background-image: linear-gradient(to bottom right, DeepPink, red, orangeRed, DarkOrange,orange,gold, greenyellow,limegreen);
+}
 
