@@ -65,11 +65,21 @@ function drawMap(world, data) {
     // .attr('stroke-width', '2.5')
     // .attr("transform", d => `translate(${projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])})`)
     .attr("transform", d => `translate(${projection([d.longitude, d.latitude])})`)
-    .attr("r", .75)
+    .attr("r", 0)
     .style('cursor', 'cell');
   
   var tooltip = d3.selectAll("#toolTip");
 
+  svg.selectAll(".gem")
+  .transition()
+  .duration(200)
+  .ease(d3.easeBounceIn)
+  .attr("r", 4)
+  .transition()
+  .duration(200)
+  .ease(d3.easeBounceOut)
+  .attr("r", .75)
+  .delay(function(d,i){console.log(i) ; return(i*1)});
   
   function hover(event, d){
     d3.select(this)
@@ -246,14 +256,12 @@ d3.json('data/colorCats.json').then(function(data){
       .style('color',function() { return d.color; });
       tooltip
       .html("")
+      .selectAll("a")
       .data(d.data)
-      .append("a")
-      .attr('href', `${d.data.link}`)
+      .join("a")
+      .attr('href', function(d){return d.link;})
       .attr('target', '_blank')
       .attr('class', 'toolTipData')
-      .selectAll("text")
-      .data(d.data)
-      .join("text")
       .html(function(d) { return '<span class="name">' + d.title + '</span>' + "<br/>" 
       + '<b>' + d.description[0].label0 + '</b> ' + d.description[0].conten0 + '<br>'
       + '<b>' + d.description[1].label1 + '</b> ' + d.description[1].content1 + '<br>'
