@@ -72,12 +72,12 @@ function drawMap(world, data) {
 
   svg.selectAll(".gem")
   .transition()
-  .duration(200)
-  .ease(d3.easeBounceIn)
+  .duration(400)
+  .ease(d3.easeBackInOut)
   .attr("r", 4)
   .transition()
-  .duration(200)
-  .ease(d3.easeBounceOut)
+  .duration(400)
+  .ease(d3.easeBackInOut)
   .attr("r", .75)
   .delay(function(d,i){console.log(i) ; return(i*1)});
   
@@ -306,7 +306,7 @@ d3.json('data/colorCats.json').then(function(data){
     svg1.selectAll("rect")
     .transition()
     .duration(400)
-    .ease(d3.easeBack)
+    .ease(d3.easeBackInOut)
     .attr("y", d => y(d.value))
     .attr("height", d => y(0) - y(d.value) + 35)
     .delay(function(d,i){console.log(i) ; return(i*10)});
