@@ -1,6 +1,3 @@
-// code from:
-// https://observablehq.com/@d3/world-airports?collection=@d3/d3-geo
-
 /*** global variable/s ***/
 const width = 1000;
 /*** helper function ***/
@@ -38,7 +35,7 @@ function drawMap(world, data) {
 
   g.append("use")
     .attr("xlink:href", new URL("#outline", location))
-    .attr("fill", "#fffff0");
+    .attr("fill", "#303030");
     
   g.append("path")
     .attr("d", path(graticule))
@@ -61,9 +58,6 @@ function drawMap(world, data) {
     .join("circle")
     .attr('class', 'gem')
     .attr('fill', 'white')
-    // .attr('stroke', 'black')
-    // .attr('stroke-width', '2.5')
-    // .attr("transform", d => `translate(${projection([d.geometry.coordinates[0], d.geometry.coordinates[1]])})`)
     .attr("transform", d => `translate(${projection([d.longitude, d.latitude])})`)
     .attr("r", 0)
     .style('cursor', 'cell');
@@ -110,12 +104,6 @@ function drawMap(world, data) {
       .attr('class', 'toolTipData')
       .append("text")
       .html(`<span class="name">${d.title}</span><br>`)
-      // .append("text")
-      // .html(`Carat Weight: <b>${d.caratWeight}<br>`)
-      // .append("text")
-      // .html(`Cut: <b>${d.cut}<br>`)
-      // .append("text")
-      // .html(`Description: <b>${d.color}<br>`)
       .append("text")
       .html(`<b>${d.description[0].label0}</b> ${d.description[0].conten0}<br>
       <b>${d.description[1].label1}</b> ${d.description[1].content1}<br>
@@ -123,11 +111,8 @@ function drawMap(world, data) {
       <b>${d.description[3].label3}</b> ${d.description[3].content3}<br>
       <b>${d.description[4].label4}</b> ${d.description[4].content4}`)
       .append('img')
-      // .data(data)
       .attr('class', 'toolTipImage')
       .attr('width', 340)
-      // .attr('height', 100)
-      // .html(`<img src=${appendImage}>`)
       .attr('src', function() {
         if (d.filename === "NMNH-501014.jpg" 
         || d.filename === "NMNH-503014.jpg" 
