@@ -15,6 +15,8 @@ All items link directly to the collection record on the museum's website. This i
 
 ![Alt text](/Documentation/ByGeo.png?raw=true)
 
+### Data Analysis
+
 I learned over time that the structure of the Smithsonian's returned API data required a more adaptive approach to the data analysis than the rigid criteria I had begun with. For example, looking for the carat weight value in the same exact location of the data would often return "null" values. Generalizing the search queries, in addition to creating a placeholder graphic for items with rights-managed images allowed me to broaden my dataset as much as possible without encountering any "null" values or other missing pieces. This was especially important for the map, where the sparseness of the available data could quickly become an issue. 
 
 
